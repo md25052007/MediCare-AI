@@ -1,0 +1,27 @@
+# Environment Secrets
+.env
+
+# Python Virtual Environments
+myenv/
+myenv_gpu/
+__pycache__/
+app/__pycache__/
+
+# Databases (Don't push patient data to GitHub!)
+medical_system.db
+medical_db/
+
+# Large Datasets
+datasetkaggle/
+patient_structured_data.csv
+
+# Node stuff
+node_modules/
+app/node_modules/
+
+app/.env
+
+extra/
+
+
+scripts/__pycache__/

@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+chromadb
+tqdm
+bcrypt
+passlib[bcrypt]
+transformers
+torch
+PyJWT
