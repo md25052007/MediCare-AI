@@ -11,6 +11,7 @@ sys.path.append(BASE_DIR)
 from app.database import SessionLocal
 from app.models import User
 from app.auth import get_password_hash
+from app.config import DEMO_PATIENT_PASSWORD
 
 CSV_FILE_PATH = os.path.join(BASE_DIR, "patient_structured_data.csv") 
 PATIENT_ID_COLUMN = "patient_id" 
@@ -47,7 +48,7 @@ def seed_patients_bulk():
         return
 
     print(f"⚙️ Preparing to insert {len(unique_patient_ids)} NEW patients...")
-    universal_hashed_pw = get_password_hash("patient123")
+    universal_hashed_pw = get_password_hash(DEMO_PATIENT_PASSWORD)
 
     new_users_data = [
         {
@@ -77,7 +78,7 @@ def seed_patients_bulk():
     
     end_time = time.time()
     print(f"\n🎉 DONE! Successfully added {len(unique_patient_ids)} new patients in {round(end_time - start_time, 2)} seconds!")
-    print("⚠️ REMINDER: Every patient's password is now: patient123")
+    print("⚠️ REMINDER: Every patient's password is the DEMO_PATIENT_PASSWORD from .env (default: patient123)")
 
 if __name__ == "__main__":
     seed_patients_bulk()

@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from . import config, models, database
 
-def delete_patient_completely(patient_id: str, csv_path: str = "data/patients.csv"):
+def delete_patient_completely(patient_id: str, csv_path: str = config.OUTPUT_CSV):
     """Deletes a patient from SQLite, ChromaDB, and the source CSV."""
     
     # 1. Delete from SQLite (The Source of Truth)

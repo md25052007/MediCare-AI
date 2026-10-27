@@ -91,6 +91,13 @@ def parse_fhir(file_path):
                 if not latest_obs_date or obs_date > latest_obs_date:
                     latest_obs_date = obs_date
 
+            # Blood pressure panels keep systolic/diastolic inside "component"
+            for comp in resource.get("component", []):
+                comp_display = comp.get("code", {}).get("coding", [{}])[0].get("display", "").lower()
+                comp_val = comp.get("valueQuantity", {}).get("value")
+                if "systolic" in comp_display and isinstance(comp_val, (int, float)):
+                    attrs["last_bp_systolic_value"] = comp_val
+
             val = resource.get("valueQuantity", {}).get("value")
             code = resource.get("code", {}).get("coding", [{}])[0]
             display = code.get("display", "").lower()

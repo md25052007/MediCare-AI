@@ -1,6 +1,7 @@
 import sqlite3
 import bcrypt
 from app.auth import get_password_hash
+from app.config import DEMO_PATIENT_PASSWORD
 
 # Configuration
 DB_PATH = "./medical_system.db"
@@ -13,7 +14,7 @@ def create_patient_accounts():
 
     for pid in PATIENT_IDS:
         username = pid
-        password = f"{pid}123"
+        password = DEMO_PATIENT_PASSWORD
         hashed_pw = get_password_hash(password)
         
         try:

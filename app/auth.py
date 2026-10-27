@@ -10,8 +10,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 def get_password_hash(password: str) -> str:
     """Hashes a password with a 72-byte safety limit for Bcrypt."""
     # 1. Encode to bytes to check actual byte length (not just character count)
-    print(f"DEBUG: Hashing string: {password}") # Add this!
-    print(f"DEBUG: Length: {len(password)}")
     pw_bytes = password.encode('utf-8')
     
     # 2. Truncate to the first 72 bytes

@@ -10,7 +10,7 @@ import uuid
 import csv
 import json
 import sqlite3
-from . import auth, models, database, query_engine
+from . import auth, config, models, database, query_engine
 from typing import Optional, List, Dict, Any
 from passlib.context import CryptContext
 import os
@@ -264,7 +264,7 @@ def add_new_patient(request: AddPatientRequest):
         
         try:
             # Prepare the password (Bcrypt)
-            raw_password = "patient123"
+            raw_password = config.DEMO_PATIENT_PASSWORD
             hashed_pw = auth.get_password_hash(raw_password)
             
             # A. Insert User
@@ -395,7 +395,7 @@ def add_new_patient(
         # --- 3. LAYER 1: SQLALCHEMY (Identity & Records) ---
         if not existing_patient:
             # Create NEW User only if they don't exist
-            hashed_pw = auth.get_password_hash("patient123")
+            hashed_pw = auth.get_password_hash(config.DEMO_PATIENT_PASSWORD)
             new_user = models.User(username=pid, hashed_password=hashed_pw, role="patient")
             db.add(new_user)
             print(f"🆕 Created new user profile for {pid}")

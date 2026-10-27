@@ -96,7 +96,7 @@ class EHRQueryEngine:
             return {"error": "Database not initialized."}
 
         # Use None for patient_id to trigger "Global" filter in your RBAC logic
-        filter_result = create_filter(user_role, auth_id, patient_id=None)
+        filter_result = create_filter(user_role, auth_id, target_patient_id=None)
         
         if isinstance(filter_result, str):
             return {"error": filter_result}
@@ -107,7 +107,7 @@ class EHRQueryEngine:
         results = self.collection.query(
             query_embeddings=[query_vector],
             n_results=10, 
-            where=filter_result,
+            where=filter_result or None,  # doctors' global search has no filter
             include=["documents", "metadatas"]
         )
 
